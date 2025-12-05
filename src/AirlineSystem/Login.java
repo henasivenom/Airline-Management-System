@@ -66,7 +66,7 @@ public void actionPerformed(ActionEvent ae) {
 			ResultSet rs = c.s.executeQuery(query);
 			
 			if(rs.next()) {
-				
+				new Home();
 				setVisible(false);
 			} else {
 				JOptionPane.showMessageDialog(null, "Invalid Username or Password");
