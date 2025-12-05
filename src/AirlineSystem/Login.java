@@ -36,13 +36,13 @@ public class Login extends JFrame implements ActionListener{
 		add(reset);
 		
 
-		submit = new JButton("Reset");
+		submit = new JButton("Submit");
 		submit.setBounds(190, 120, 120, 20);
 		submit.addActionListener(this);
 		add(submit);
 		
 
-		close = new JButton("Reset");
+		close = new JButton("Close");
 		close.setBounds(120, 160, 120, 20);
 		close.addActionListener(this);
 		add(close);
