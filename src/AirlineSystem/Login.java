@@ -2,13 +2,16 @@ package AirlineSystem;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+
 import javax.swing.*;
 
 
 public class Login extends JFrame implements ActionListener{
 	
 	JButton submit, reset, close;
-	JTextField tfusername,tfpassword;
+	JTextField tfusername;
+	JPasswordField tfpassword;
 	
 	public Login() {
 		setLayout(null);
@@ -26,7 +29,7 @@ public class Login extends JFrame implements ActionListener{
 		tfusername.setBounds(130, 20, 200, 20);
 		add(tfusername);
 		
-		tfpassword = new JTextField();
+		tfpassword = new JPasswordField();
 		tfpassword.setBounds(130, 60, 200, 20);
 		add(tfpassword);
 		
@@ -47,10 +50,6 @@ public class Login extends JFrame implements ActionListener{
 		close.addActionListener(this);
 		add(close);
 		
-		
-		
-		
-		
 		setSize(400,250);
 		setLocation(600,250);
 		setVisible(true);
@@ -58,7 +57,25 @@ public class Login extends JFrame implements ActionListener{
 	
 public void actionPerformed(ActionEvent ae) {
 	if(ae.getSource() == submit) {
+		String username = tfusername.getText();
+		String password = tfpassword.getText();
 		
+		try {
+			Conn c = new Conn();
+			String query = "select * from login where username = "+username+" and password = "+password+"";
+			ResultSet rs = c.s.executeQuery(query);
+			
+			if(rs.next()) {
+				
+				setVisible(false);
+			} else {
+				JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+				setVisible(false);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	else if (ae.getSource() == reset) {
 		tfusername.setText("");
