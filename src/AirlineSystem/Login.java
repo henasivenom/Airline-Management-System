@@ -62,7 +62,11 @@ public void actionPerformed(ActionEvent ae) {
 		
 		try {
 			Conn c = new Conn();
-			String query = "select * from login where username = "+username+" and password = "+password+"";
+			if (!c.isConnected) {
+				JOptionPane.showMessageDialog(null, "Database connection failed.\nEnsure MySQL is running and JDBC driver is in:\nd:\\J2EE\\Lib\\mysql-connector-java-8.0.33.jar");
+				return;
+			}
+			String query = "select * from login where username = '"+username+"' and password = '"+password+"'";
 			ResultSet rs = c.s.executeQuery(query);
 			
 			if(rs.next()) {
@@ -74,6 +78,7 @@ public void actionPerformed(ActionEvent ae) {
 			}
 		}
 		catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
